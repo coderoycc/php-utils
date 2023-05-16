@@ -14,4 +14,10 @@ SELECT CONVERT(VARCHAR(19), tu_columna_fecha, 120) AS fecha FROM tu_tabla;
 
 En este ejemplo, `tu_columna_fecha` es el nombre de la columna que contiene la fecha en SQL Server, y `tu_tabla` es el nombre de la tabla donde se encuentra la columna. La función `CONVERT()` con el estilo `120` se utiliza para convertir la fecha en formato "AAAA-MM-DD HH:MI:SS" a una cadena de texto.
 
-Una vez que te asegures de que estás obteniendo la fecha como una cadena de texto desde SQL Server, puedes utilizarla en PHP y aplicar el resto del proceso que te mencioné anteriormente para formatearla como "DIA/MES HORA:MINUTO".
+Una vez que te asegures de que estás obteniendo la fecha como una cadena de texto desde SQL Server, se puede usar en PHP y aplicar el formateado "DIA/MES HORA:MINUTO", de la siguiente manera.
+```php
+$fecha_php = strtotime($fecha_sql);
+$fecha_formateada = date('d/m H:i', $fecha_php);
+```
+Donde `fecha_sql` es la fecha que obtenemos de PHP. Y la formateamos en `fecha_php`.
+
