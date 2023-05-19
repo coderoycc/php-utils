@@ -1,2 +1,3 @@
 # PHP UTILS
-Funciones, utiles para PHP
+Funciones, utiles para PHP acompañados de JS.
+
