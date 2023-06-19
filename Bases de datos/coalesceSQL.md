@@ -1,6 +1,6 @@
 ## Uso de COALESCE en SQL Server
 ### Caso: Obtener ids y nombres de una tabla y contar la cantidad de apariciones en otra tabla.
-Nota. Siempre se debe mostrar todos los nombres y IDS de la primera tabla aunqueno aparezca en la segunda tabla (cero apariciones)
+Nota. Siempre se debe mostrar todos los nombres y IDS de la primera tabla aunque no aparezca en la segunda tabla (cero apariciones)
 
 Para obtener todos los registros de la tabla `tblRespuestas` con `idContenido` igual a 45, incluyendo las respuestas que no tienen registros correspondientes en la tabla `tblAvance` (con una cantidad de respuestas de 0), puedes utilizar una consulta con una subconsulta y el operador `LEFT JOIN`. Aquí tienes el ejemplo de la consulta SQL:
 
