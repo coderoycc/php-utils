@@ -10,5 +10,10 @@ $_SERVER['HOST_NAME'];
 ```php
 $_SERVER['SERVER_PORT']
 ```
-
+* Poder reconocer el tipo de petición que se recibio en el servidor.
+```php
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  // codigo por verdadero
+}
+```
 
