@@ -1,0 +1,50 @@
+<?php
+/**
+ * Realiza una solicitud a una API REST y devuelve los datos decodificados.
+ *
+ * @param string $url URL de la API a consumir.
+ * @return array|null Datos decodificados en formato de arreglo o null si falla.
+ */
+function consumirApi(string $url): ?array {
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $respuesta = curl_exec($curl);
+    if (curl_errno($curl)) {
+        error_log("Error en cURL: " . curl_error($curl));
+        curl_close($curl);
+        return null;
+    }
+
+    curl_close($curl);
+    return json_decode($respuesta, true);
+}
+
+/**
+ * Muestra datos específicos de una respuesta API en formato HTML.
+ *
+ * @param array $datos Datos decodificados de la API.
+ */
+function mostrarPronostico(array $datos): void {
+    echo "<h1>Pronóstico del Clima</h1>";
+    if (!empty($datos["daily"]["temperature_2m_max"])) {
+        foreach ($datos["daily"]["temperature_2m_max"] as $indice => $temperatura) {
+            echo "<p>Día " . ($indice + 1) . ": {$temperatura}°C</p>";
+        }
+    } else {
+        echo "<p>No se pudo obtener el pronóstico del clima.</p>";
+    }
+}
+
+// URL de la API (puedes adaptarla según el servicio que necesites consumir)
+$apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=40.7128&longitude=-74.0060&daily=temperature_2m_max&timezone=auto";
+
+// Consumir la API y mostrar los datos
+$datosClima = consumirApi($apiUrl);
+if ($datosClima !== null) {
+    mostrarPronostico($datosClima);
+} else {
+    echo "<p>Error al consumir la API. Por favor, verifica los registros del servidor.</p>";
+}
+?>
